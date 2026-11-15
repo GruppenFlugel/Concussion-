@@ -1,0 +1,55 @@
+[gd_scene format=3 uid="uid://dljiit023ayy4"]
+
+[ext_resource type="Texture2D" uid="uid://b1apm2p7xqavk" path="res://death screen.png" id="1_ftl74"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5mq0c"]
+atlas = ExtResource("1_ftl74")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0ajwu"]
+atlas = ExtResource("1_ftl74")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tnnxq"]
+atlas = ExtResource("1_ftl74")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_elkug"]
+atlas = ExtResource("1_ftl74")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bshr0"]
+atlas = ExtResource("1_ftl74")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mlx6f"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5mq0c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0ajwu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tnnxq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_elkug")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bshr0")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 2.0
+}]
+
+[node name="deathscreen" type="CanvasLayer" unique_id=1286125905]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1117550530]
+position = Vector2(400, -342)
+scale = Vector2(26, 22.375)
+sprite_frames = SubResource("SpriteFrames_mlx6f")
+frame = 3
+frame_progress = 0.5188102

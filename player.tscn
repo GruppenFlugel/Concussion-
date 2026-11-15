@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://b068qa808lbbg"]
+
+[ext_resource type="Script" uid="uid://cp2wt5y6hlrho" path="res://doctor_blue_ball.gd" id="1_onrkg"]
+[ext_resource type="Texture2D" uid="uid://do65peeo18qr8" path="res://player.png" id="2_onrkg"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_body"]
+radius = 10.0
+
+[node name="Player" type="Node2D" unique_id=2024540625]
+
+[node name="Doctor Blue Ball" type="CharacterBody2D" parent="." unique_id=954033488 groups=["player"]]
+position = Vector2(2, 0)
+disable_mode = 2
+collision_layer = 31
+collision_mask = 3
+motion_mode = 1
+slide_on_ceiling = false
+script = ExtResource("1_onrkg")
+
+[node name="Sprite2D" type="Sprite2D" parent="Doctor Blue Ball" unique_id=1247614227]
+texture_filter = 1
+position = Vector2(0.22265244, 5.6752977)
+scale = Vector2(0.43806073, 0.38519713)
+texture = ExtResource("2_onrkg")
+
+[node name="Camera2D" type="Camera2D" parent="Doctor Blue Ball/Sprite2D" unique_id=556015483]
+zoom = Vector2(3, 3)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Doctor Blue Ball" unique_id=125956773]
+position = Vector2(0, 2)
+shape = SubResource("CircleShape2D_body")

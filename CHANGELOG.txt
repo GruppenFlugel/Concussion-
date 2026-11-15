@@ -1,0 +1,14 @@
+# Changelog
+
+# v1.1.0
+- Fix texture and dither pattern mismatch - dither pattern now matches texture pixel positions
+- Texture Mask Portal added
+    - New shaders - `pixel_portal_stencil_mask.gdshader`, `pixel_portal_texture_mask.gdshader`
+- New free example 
+    - `pixel_portals_mask_runes.tscn` - including a texture for a rune circle with mask texture
+- New premium examples
+    - `pixel_portals_mask_runes_alt.tscn` - including a texture for alternating (see README) rune circle with mask texture
+    - `pixel_portals_mask_seals.tscn` - including a new mask texture for the seals texture
+    - `pixel_portals_simple_presets.tscn` - new preset for the basic pixel portal shader
+- Changed `DemoPortal` so you can change uniforms from the stencil and visual shader in one place and removed the inefficient sync functionallity
+

@@ -1,0 +1,271 @@
+[gd_scene format=3 uid="uid://be6ysr32ttkq"]
+
+[ext_resource type="Shader" uid="uid://catdhnjgt7mwy" path="res://examples/base/utility/floor3d.gdshader" id="1_63do0"]
+[ext_resource type="Texture2D" uid="uid://bwmekc450hxnj" path="res://examples/base/sprites/demo-tile-dark-scaled.png" id="2_qk2om"]
+[ext_resource type="Script" uid="uid://cua0dysnutm66" path="res://examples/base/utility/orbit.gd" id="3_gb3de"]
+[ext_resource type="Shader" uid="uid://bq668xtrh3ib4" path="res://addons/pixel_portals/pixel_portal_texture_mask.gdshader" id="4_nctcc"]
+[ext_resource type="Texture2D" uid="uid://ckiemj87uf3li" path="res://examples/base/sprites/circle_runes.png" id="5_60h17"]
+[ext_resource type="Texture2D" uid="uid://b7qnp7m1qx587" path="res://examples/base/sprites/circle_runes_mask.png" id="6_e5p34"]
+[ext_resource type="Shader" uid="uid://ditbeucnmacdo" path="res://addons/pixel_portals/pixel_portal_stencil_mask.gdshader" id="7_mpw8e"]
+[ext_resource type="Script" uid="uid://btwck4qdxgnwb" path="res://examples/base/utility/demo_portal.gd" id="8_qgv1d"]
+[ext_resource type="Shader" uid="uid://cltys6lou2qbk" path="res://examples/base/utility/floor3d_stencil.gdshader" id="9_6pcgy"]
+[ext_resource type="Texture2D" uid="uid://b4007amnflpy" path="res://examples/base/sprites/demo-tile-light-scaled.png" id="10_m6xqo"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_e8mh3"]
+sky_top_color = Color(0, 0, 0, 1)
+sky_horizon_color = Color(1, 1, 1, 1)
+sky_energy_multiplier = 0.4
+
+[sub_resource type="Sky" id="Sky_d653j"]
+sky_material = SubResource("ProceduralSkyMaterial_e8mh3")
+
+[sub_resource type="Environment" id="Environment_6tkrt"]
+background_mode = 2
+background_color = Color(0.099985994, 0.099985994, 0.099985994, 1)
+sky = SubResource("Sky_d653j")
+glow_enabled = true
+glow_normalized = true
+glow_strength = 1.72
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7t3ax"]
+render_priority = 0
+shader = ExtResource("1_63do0")
+shader_parameter/bg_texture = ExtResource("2_qk2om")
+shader_parameter/speed = Vector2(0, 0)
+shader_parameter/scale = 0.004
+shader_parameter/invert = false
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_me0rb"]
+material = SubResource("ShaderMaterial_7t3ax")
+size = Vector2(1000, 1000)
+
+[sub_resource type="GDScript" id="GDScript_7t3ax"]
+script/source = "extends Camera3D
+"
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_rjuln"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tm8k1"]
+render_priority = 2
+shader = ExtResource("4_nctcc")
+shader_parameter/pixel_size = 4.0
+shader_parameter/resolution = Vector2(512, 512)
+shader_parameter/wall_texture = ExtResource("5_60h17")
+shader_parameter/wall_background = Color(0, 0, 0, 1)
+shader_parameter/texture_repeat = false
+shader_parameter/texture_horizontal_flip_variation = true
+shader_parameter/texture_vertical_flip_variation = true
+shader_parameter/texture_vary_mode = 1
+shader_parameter/texture_variations = 1
+shader_parameter/texture_layer_offset = Vector2(0, 0)
+shader_parameter/texture_color_combine = 0
+shader_parameter/wall_texture_mask = ExtResource("6_e5p34")
+shader_parameter/mask_start_threshold = 0.062
+shader_parameter/mask_end_threshold = 1.0
+shader_parameter/mask_range = 0.186
+shader_parameter/mask_threshold_incremental = true
+shader_parameter/mask_layer_increment = 0.124
+shader_parameter/mask_threshold_falloff = 1.0
+shader_parameter/mask_threshold_scale = 1.0
+shader_parameter/last_layer_transparent = true
+shader_parameter/first_layer_transparent = false
+shader_parameter/transparency_transition = 1
+shader_parameter/transparency_falloff = 1.5
+shader_parameter/rim = false
+shader_parameter/rim_radius = 0.485
+shader_parameter/vary_radius = false
+shader_parameter/radius_variation = 0.1
+shader_parameter/radius_speed_variation = 1.0
+shader_parameter/dither_offset = Vector2i(1, 0)
+shader_parameter/bayer_size = 2
+shader_parameter/interpolate = true
+shader_parameter/falloff = 4.395
+shader_parameter/enable_outlines = true
+shader_parameter/outlines_double = true
+shader_parameter/outline_color = Color(0, 0, 0, 1)
+shader_parameter/color_repeat_layer = 0
+shader_parameter/color_offset_layer = 0
+shader_parameter/color_one = Color(0.54901963, 1, 1, 1)
+shader_parameter/color_two = Color(0.54901963, 1, 1, 1)
+shader_parameter/color_falloff = 3.0
+shader_parameter/color_transition = 0
+shader_parameter/glow_repeat_layer = 0
+shader_parameter/glow_offset_layer = 0
+shader_parameter/glow = 2.0
+shader_parameter/glow_falloff = 0.0
+shader_parameter/depth_amount = 0.5
+shader_parameter/layers = 6
+shader_parameter/radius_variation_offset = 1.0
+shader_parameter/radius_random_offset = true
+shader_parameter/center = Vector2(0.5, 0.5)
+shader_parameter/rotation_repeat_layer = 8
+shader_parameter/rotation_offset_layer = 9
+shader_parameter/rotation = 2.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_01hd2"]
+render_priority = 0
+next_pass = SubResource("ShaderMaterial_tm8k1")
+shader = ExtResource("7_mpw8e")
+shader_parameter/pixel_size = 4.0
+shader_parameter/resolution = Vector2(512, 512)
+shader_parameter/wall_texture = ExtResource("5_60h17")
+shader_parameter/wall_background = Color(0, 0, 0, 1)
+shader_parameter/texture_repeat = false
+shader_parameter/texture_horizontal_flip_variation = true
+shader_parameter/texture_vertical_flip_variation = true
+shader_parameter/texture_vary_mode = 1
+shader_parameter/texture_variations = 1
+shader_parameter/texture_layer_offset = Vector2(0, 0)
+shader_parameter/wall_texture_mask = ExtResource("6_e5p34")
+shader_parameter/mask_start_threshold = 0.062
+shader_parameter/mask_end_threshold = 1.0
+shader_parameter/mask_range = 0.186
+shader_parameter/mask_threshold_incremental = true
+shader_parameter/mask_layer_increment = 0.124
+shader_parameter/mask_threshold_falloff = 1.0
+shader_parameter/mask_threshold_scale = 1.0
+shader_parameter/last_layer_transparent = true
+shader_parameter/first_layer_transparent = false
+shader_parameter/transparency_transition = 1
+shader_parameter/transparency_falloff = 1.5
+shader_parameter/depth_amount = 0.5
+shader_parameter/layers = 6
+shader_parameter/radius_variation_offset = 1.0
+shader_parameter/radius_random_offset = true
+shader_parameter/center = Vector2(0.5, 0.5)
+shader_parameter/rotation_repeat_layer = 8
+shader_parameter/rotation_offset_layer = 9
+shader_parameter/rotation = 2.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ck1l3"]
+render_priority = 1
+shader = ExtResource("9_6pcgy")
+shader_parameter/bg_texture = ExtResource("10_m6xqo")
+shader_parameter/speed = Vector2(0, 0)
+shader_parameter/scale = 0.004
+shader_parameter/invert = false
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_yc1ov"]
+material = SubResource("ShaderMaterial_ck1l3")
+size = Vector2(1000, 1000)
+
+[sub_resource type="BoxMesh" id="BoxMesh_jw7x8"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jcslc"]
+render_priority = 2
+transparency = 1
+stencil_mode = 3
+stencil_flags = 1
+stencil_compare = 2
+
+[node name="TextureMaskPortalDemo" type="Node3D" unique_id=589736465]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=212363956]
+transform = Transform3D(0.9848077, -0.15038374, 0.08682408, 0, 0.49999997, 0.86602545, -0.17364818, -0.85286856, 0.49240384, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1935722707]
+environment = SubResource("Environment_6tkrt")
+
+[node name="Floor" type="MeshInstance3D" parent="." unique_id=1283877464]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0011832714, 0.0044658184, -0.0019609928)
+mesh = SubResource("PlaneMesh_me0rb")
+
+[node name="Node3D" type="Node3D" parent="." unique_id=2132801366]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+script = ExtResource("3_gb3de")
+mouse_sensitivity = 0.1
+
+[node name="Camera3D" type="Camera3D" parent="Node3D" unique_id=895343072]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.5529552)
+script = SubResource("GDScript_7t3ax")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=2128957486]
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer" unique_id=190622691]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -169.0
+offset_top = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="LinkButton" type="LinkButton" parent="CanvasLayer/MarginContainer" unique_id=264053639]
+layout_mode = 2
+text = "Rate this asset! (https://nojoule.itch.io/pixel-portals/rate)"
+uri = "https://nojoule.itch.io/pixel-portals/rate"
+
+[node name="Portal" type="MeshInstance3D" parent="." unique_id=581649947]
+transform = Transform3D(1, 0, 0, 0, 0.17364821, -0.98480767, 0, 0.98480767, 0.17364821, 0, 1.5, 0)
+mesh = SubResource("PlaneMesh_rjuln")
+surface_material_override/0 = SubResource("ShaderMaterial_01hd2")
+script = ExtResource("8_qgv1d")
+Uniforms/pixel_size = 4.0
+Uniforms/resolution = Vector2(512, 512)
+Uniforms/wall_texture = ExtResource("5_60h17")
+Uniforms/wall_background = Color(0, 0, 0, 1)
+Uniforms/texture_repeat = false
+Uniforms/texture_horizontal_flip_variation = true
+Uniforms/texture_vertical_flip_variation = true
+Uniforms/texture_vary_mode = 1
+Uniforms/texture_variations = 1
+Uniforms/texture_layer_offset = Vector2(0, 0)
+Uniforms/texture_color_combine = 0
+Uniforms/wall_texture_mask = ExtResource("6_e5p34")
+Uniforms/mask_start_threshold = 0.062
+Uniforms/mask_end_threshold = 1.0
+Uniforms/mask_range = 0.186
+Uniforms/mask_threshold_incremental = true
+Uniforms/mask_layer_increment = 0.124
+Uniforms/mask_threshold_falloff = 1.0
+Uniforms/mask_threshold_scale = 1.0
+Uniforms/last_layer_transparent = true
+Uniforms/first_layer_transparent = false
+Uniforms/transparency_transition = 1
+Uniforms/transparency_falloff = 1.5
+Uniforms/rim = false
+Uniforms/rim_radius = 0.485
+Uniforms/vary_radius = false
+Uniforms/radius_variation = 0.1
+Uniforms/radius_speed_variation = 1.0
+Uniforms/dither_offset = Vector2i(1, 0)
+Uniforms/bayer_size = 2
+Uniforms/interpolate = true
+Uniforms/falloff = 4.395
+Uniforms/enable_outlines = true
+Uniforms/outlines_double = true
+Uniforms/outline_color = Color(0, 0, 0, 1)
+Uniforms/color_repeat_layer = 0
+Uniforms/color_offset_layer = 0
+Uniforms/color_one = Color(0.54901963, 1, 1, 1)
+Uniforms/color_two = Color(0.54901963, 1, 1, 1)
+Uniforms/color_falloff = 3.0
+Uniforms/color_transition = 0
+Uniforms/glow_repeat_layer = 0
+Uniforms/glow_offset_layer = 0
+Uniforms/glow = 2.0
+Uniforms/glow_falloff = 0.0
+Uniforms/depth_amount = 0.5
+Uniforms/layers = 6
+Uniforms/radius_variation_offset = 1.0
+Uniforms/radius_random_offset = true
+Uniforms/center = Vector2(0.5, 0.5)
+Uniforms/rotation_repeat_layer = 8
+Uniforms/rotation_offset_layer = 9
+Uniforms/rotation = 2.0
+
+[node name="PortalFloor" type="MeshInstance3D" parent="." unique_id=422498956]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.007, 0)
+mesh = SubResource("PlaneMesh_yc1ov")
+
+[node name="PortalCube" type="MeshInstance3D" parent="." unique_id=1743194323]
+transform = Transform3D(0.42426407, 0.23107077, 0.3558178, 0, 0.5032024, -0.32678345, -0.42426407, 0.23107077, 0.3558178, 0, 0.6815556, -4.2637644)
+mesh = SubResource("BoxMesh_jw7x8")
+surface_material_override/0 = SubResource("StandardMaterial3D_jcslc")
